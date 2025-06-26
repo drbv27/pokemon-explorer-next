@@ -14,6 +14,8 @@
 
 Una aplicación web moderna y 100% responsiva para explorar los Pokémon de la primera generación, construida con las mejores prácticas y un fuerte enfoque en la experiencia de usuario.
 
+### Tambien puedes explorar la version `REACT`: [**Pokemon explorer React**](https://github.com/drbv27/pkemon-explorer-react)
+
 ---
 
 ### 📸 Capturas de Pantalla
