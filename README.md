@@ -47,7 +47,7 @@ Una aplicación web moderna y 100% responsiva para explorar los Pokémon de la p
 
 Puedes explorar la aplicación desplegada aquí:(link falso)
 
-[**https://tu-pokemon-explorer.vercel.app**](https://tu-pokemon-explorer.vercel.app)
+[**https://pokemon-explorer-next.vercel.app/**](https://pokemon-explorer-next.vercel.app/)
 
 ---
 
