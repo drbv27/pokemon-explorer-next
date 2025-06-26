@@ -104,13 +104,13 @@ Para levantar una copia local de la aplicación, sigue estos sencillos pasos:
 1.  **Clona el repositorio**
 
     ```bash
-    git clone [https://github.com/tu-usuario/pokemon-explorer.git](https://github.com/tu-usuario/pokemon-explorer.git)
+    git clone https://github.com/drbv27/pokemon-explorer-next
     ```
 
 2.  **Navega al directorio del proyecto**
 
     ```bash
-    cd pokemon-explorer
+    cd pokemon-explorer-next
     ```
 
 3.  **Instala las dependencias** (se recomienda usar `npm`)
@@ -125,7 +125,7 @@ Para levantar una copia local de la aplicación, sigue estos sencillos pasos:
     npm run dev
     ```
 
-5.  Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
+5.  Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación (o el que te indique NEXT si tienes otros proyectos corriendo).
 
 ## 📫 Contacto
 
