@@ -1,16 +1,17 @@
 "use client";
-import { ColumnDef } from "@tanstack/react-table";
+import { type Column, type ColumnDef } from "@tanstack/react-table";
 import { ProcessedPokemon } from "@/hooks/use-pokemons";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { PokemonTypeBadge } from "./pokemon-type-badge";
+import Image from "next/image";
 
 // Componente de UI reutilizable para estandarizar las cabeceras de columna ordenables.
 const SortableHeader = ({
   column,
   children,
 }: {
-  column: any;
+  column: Column<ProcessedPokemon, unknown>;
   children: React.ReactNode;
 }) => (
   <Button
@@ -31,10 +32,12 @@ export const getColumns = (
     accessorKey: "sprites.front_default",
     header: "Imagen",
     cell: ({ row }) => (
-      <img
+      <Image
         src={row.original.sprites.front_default}
         alt={row.original.name}
-        className="w-16 h-16 mx-auto"
+        width={64}
+        height={64}
+        className="mx-auto"
       />
     ),
     enableSorting: false,

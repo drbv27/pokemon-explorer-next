@@ -124,3 +124,9 @@ Para levantar una copia local de la aplicación, sigue estos sencillos pasos:
     ```
 
 5.  Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
+
+## 📫 Contacto
+
+[![GitHub](https://img.shields.io/badge/GitHub-drbv27-181717?logo=github)](https://github.com/drbv27)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-DiegoBonilla-0A66C2?logo=linkedin)](https://www.linkedin.com/in/diego-ricardo-bonilla-villa-7179254a/)
+[![Email](https://img.shields.io/badge/Email-DiegoBonilla-D14836?logo=gmail)](mailto:drbv27@gmail.com)

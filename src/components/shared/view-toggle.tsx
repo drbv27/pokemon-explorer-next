@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { View, Grid, List } from "lucide-react";
+import { Grid, List } from "lucide-react";
 
 interface ViewToggleProps {
   view: "grid" | "table";
