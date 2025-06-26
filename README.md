@@ -16,12 +16,30 @@ Una aplicación web moderna y 100% responsiva para explorar los Pokémon de la p
 
 ---
 
-### 📸 Captura de Pantalla
+### 📸 Capturas de Pantalla
 
-![Imagen de la captura de pantalla de la aplicación](URL_DE_LA_CAPTURA_DE_PANTALLA)
-![Imagen de la captura de pantalla de la aplicación](URL_DE_LA_CAPTURA_DE_PANTALLA)
-![Imagen de la captura de pantalla de la aplicación](URL_DE_LA_CAPTURA_DE_PANTALLA)
-![Imagen de la captura de pantalla de la aplicación](URL_DE_LA_CAPTURA_DE_PANTALLA)
+<table>
+  <tr>
+    <td align="center">
+      Grid Desktop<br>
+      <img src="https://raw.githubusercontent.com/drbv27/pokemon-explorer-next/main/public/screen1.jpeg" alt="Grid Desktop" width="400"/>
+    </td>
+    <td align="center">
+      Table Desktop<br>
+      <img src="https://raw.githubusercontent.com/drbv27/pokemon-explorer-next/main/public/screen2.png" alt="Table Desktop" width="400"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      Grid mobile<br>
+      <img src="https://raw.githubusercontent.com/drbv27/pokemon-explorer-next/main/public/screen3.png" alt="Grid Mobile" width="400"/>
+    </td>
+    <td align="center">
+      Table mobile<br>
+      <img src="https://raw.githubusercontent.com/drbv27/pokemon-explorer-next/main/public/screen4.png" alt="Table mobile" width="400"/>
+    </td>
+  </tr>
+  </table>
 
 ---
 
