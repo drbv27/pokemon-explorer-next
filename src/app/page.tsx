@@ -1,100 +1,150 @@
+"use client";
+
+import * as React from "react";
 import Image from "next/image";
+import { usePokemons, ProcessedPokemon } from "@/hooks/use-pokemons";
+import { PokemonTable } from "@/components/pokemon/pokemon-table";
+import { PokemonGrid } from "@/components/pokemon/pokemon-grid";
+import { PokemonModal } from "@/components/pokemon/pokemon-modal";
+import { ViewToggle } from "@/components/shared/view-toggle";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useUiStore } from "@/store/ui-store";
+import { Github, Linkedin, Mail } from "lucide-react";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+export default function HomePage() {
+  // Estado global de la UI (vista, filtros, etc.) gestionado por Zustand.
+  const { view, setView } = useUiStore();
+  // Estado local para controlar el Pokémon seleccionado y el modal.
+  const [selectedPokemon, setSelectedPokemon] =
+    React.useState<ProcessedPokemon | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // Patrón para garantizar la hidratación segura del cliente.
+  // Evita un mismatch entre el render del servidor (sin estado persistido) y el del cliente.
+  const [isClient, setIsClient] = React.useState(false);
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const { pokemons, isLoading, error } = usePokemons();
+
+  const handleSelectPokemon = (pokemon: ProcessedPokemon) => {
+    setSelectedPokemon(pokemon);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedPokemon(null);
+  };
+
+  if (error) {
+    return (
+      <main className="container mx-auto p-4 text-center">
+        <h1 className="text-4xl font-bold text-red-600 mb-4">¡Oh, no!</h1>
+        <p>Hubo un error al contactar la PokéAPI.</p>
+        <p className="text-sm text-gray-500 mt-2">Detalles: {error.message}</p>
+      </main>
+    );
+  }
+
+  // Muestra el esqueleto de carga hasta que el cliente esté montado y los datos cargados.
+  // Esto previene el "flash" de contenido incorrecto antes de que el estado de Zustand se hidrate.
+  if (!isClient || isLoading) {
+    return (
+      <main className="container mx-auto p-4 md:p-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+            Pokémon Explorer
+          </h1>
+          <p className="text-lg text-muted-foreground mt-2">
+            Desafío Técnico para Litsight
+          </p>
+        </div>
+        <Skeleton className="h-10 w-48 mx-auto mb-4" />
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {Array.from({ length: 18 }).map((_, i) => (
+            <div key={i} className="flex flex-col items-center space-y-4 p-2">
+              <Skeleton className="h-32 w-32 rounded-lg" />
+              <Skeleton className="h-4 w-24" />
+            </div>
+          ))}
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+    );
+  }
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <main className="container mx-auto p-4 md:p-8">
+        <div className="relative text-center mb-8">
+          <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2">
+            <Image
+              src="/pokelogo.png"
+              alt="Pokémon Logo"
+              width={120}
+              height={44}
+              priority
+            />
+          </div>
+          <div>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+              Pokémon Explorer
+            </h1>
+            <p className="text-lg text-muted-foreground mt-2">
+              Desafío Técnico para Litsight
+            </p>
+          </div>
+        </div>
+
+        <ViewToggle view={view} setView={setView} />
+
+        <div className="mt-8">
+          {view === "table" ? (
+            <PokemonTable
+              data={pokemons}
+              onSelectPokemon={handleSelectPokemon}
+            />
+          ) : (
+            <PokemonGrid
+              pokemons={pokemons}
+              onSelectPokemon={handleSelectPokemon}
+            />
+          )}
+        </div>
+
+        {selectedPokemon && (
+          <PokemonModal
+            pokemon={selectedPokemon}
+            isOpen={!!selectedPokemon}
+            onClose={handleCloseModal}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        )}
+      </main>
+      <footer className="py-6 mt-auto border-t bg-background">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+          <p className="text-sm text-muted-foreground">
+            &copy; {new Date().getFullYear()} Diego Bonilla. Todos los derechos
+            reservados.
+          </p>
+          <div className="flex gap-4">
+            <a
+              href="mailto:drbv27@gmail.com"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Mail />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/diego-ricardo-bonilla-villa-7179254a/"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Linkedin />
+            </a>
+            <a
+              href="https://github.com/drbv27"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Github />
+            </a>
+          </div>
+        </div>
       </footer>
     </div>
   );

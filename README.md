@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Pokémon Explorer - Desafío Técnico Litsight
 
-## Getting Started
+<div align="center">
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"/>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS"/>
+  <img src="https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcnui&logoColor=white" alt="Shadcn/UI"/>
+  <img src="https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white" alt="Zustand"/>
+  <img src="https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white" alt="TanStack Query"/>
+</div>
 
-First, run the development server:
+<br/>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Una aplicación web moderna y 100% responsiva para explorar los Pokémon de la primera generación, construida con las mejores prácticas y un fuerte enfoque en la experiencia de usuario.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 📸 Captura de Pantalla
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![Imagen de la captura de pantalla de la aplicación](URL_DE_LA_CAPTURA_DE_PANTALLA)
+![Imagen de la captura de pantalla de la aplicación](URL_DE_LA_CAPTURA_DE_PANTALLA)
+![Imagen de la captura de pantalla de la aplicación](URL_DE_LA_CAPTURA_DE_PANTALLA)
+![Imagen de la captura de pantalla de la aplicación](URL_DE_LA_CAPTURA_DE_PANTALLA)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### ✨ Demo en Vivo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Puedes explorar la aplicación desplegada aquí:(link falso)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+[**https://tu-pokemon-explorer.vercel.app**](https://tu-pokemon-explorer.vercel.app)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ✅ Funcionalidades Principales
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este proyecto implementa todas las funcionalidades solicitadas en el desafío técnico, y las expande con mejoras significativas de UX.
+
+- **Dos Vistas Interactivas:** Elige entre una vista de cuadrícula visual o una potente vista de tabla.
+- **Tabla de Datos Avanzada:**
+  - **Paginación, Ordenamiento y Filtrado Dual** (por nombre y tipo) para una exploración de datos completa.
+  - **Controles Responsivos:** La interfaz de control se adapta perfectamente a cualquier tamaño de pantalla.
+- **Modal de Detalles:** Un modal claro y conciso con toda la información relevante del Pokémon seleccionado.
+- **Diseño _Mobile-First_:** Garantiza una experiencia de usuario perfecta en cualquier dispositivo.
+- **(Bonus) Indicadores Visuales:** Barras de estadísticas con colores condicionales para una fácil interpretación.
+
+---
+
+## UX/UI Mejoras Clave
+
+Más allá de los requisitos básicos, se implementaron las siguientes mejoras para elevar la calidad de la aplicación:
+
+- **Persistencia de Estado con Zustand:** La aplicación recuerda tus preferencias. Si seleccionas la vista de tabla y aplicas un filtro, estos ajustes se mantendrán incluso después de recargar la página, creando una experiencia continua y personalizada.
+- **Tarjetas de Pokémon Intuitivas:** Se diseñaron las tarjetas en la vista de cuadrícula con un "Call to Action" explícito (`Ver Detalles`). Esto elimina la ambigüedad y asegura que la interacción sea clara tanto en dispositivos de escritorio (con mouse) como en móviles (táctiles).
+- **Tabla Personalizable:** Para evitar la sobrecarga de información, se añadió un selector de columnas. Esto permite al usuario elegir qué estadísticas desea ver, ocultando por defecto las menos comunes (`At. Esp.` y `Def. Esp.`) para una vista inicial más limpia.
+- **Controles de Tabla Lógicos:** La barra de controles de la tabla fue rediseñada para ser lógicamente coherente. Los filtros están agrupados y el botón "Reiniciar" aparece de forma contextual, sin causar saltos en la interfaz.
+
+---
+
+## 🏛️ Arquitectura y Decisiones Técnicas
+
+### Stack Tecnológico
+
+- **Framework:** **Next.js 14** (App Router)
+- **Lenguaje:** **TypeScript**
+- **UI y Estilos:** **Tailwind CSS** y **Shadcn/UI**
+- **Manejo de Estado Global:** **Zustand** (para el estado de la UI y persistencia).
+- **Manejo de Estado de Servidor:** **TanStack Query (React Query)**
+- **Componente de Tabla:** **TanStack Table**
+
+### Estrategia de Obtención de Datos (Fetching)
+
+Se tomó la decisión estratégica de realizar el fetch de los detalles de los 151 Pokémon en la carga inicial.
+
+**Justificación:** El desafío requería una tabla con columnas ordenables por estadísticas (ej. "Peso", "Altura"). Para implementar esta funcionalidad correctamente, es indispensable tener todos los datos disponibles en el cliente. Cargar los datos bajo demanda habría resultado en una tabla con funcionalidades incompletas. Esta decisión prioriza una **funcionalidad completa y una experiencia de usuario fluida** (ordenamiento y filtrado instantáneos) sobre una carga inicial ligeramente más rápida, la cual es mitigada por el sistema de caché de `TanStack Query`.
+
+---
+
+## ⚙️ Cómo Ejecutar el Proyecto Localmente
+
+Para levantar una copia local de la aplicación, sigue estos sencillos pasos:
+
+1.  **Clona el repositorio**
+
+    ```bash
+    git clone [https://github.com/tu-usuario/pokemon-explorer.git](https://github.com/tu-usuario/pokemon-explorer.git)
+    ```
+
+2.  **Navega al directorio del proyecto**
+
+    ```bash
+    cd pokemon-explorer
+    ```
+
+3.  **Instala las dependencias** (se recomienda usar `npm`)
+
+    ```bash
+    npm install
+    ```
+
+4.  **Ejecuta el servidor de desarrollo**
+
+    ```bash
+    npm run dev
+    ```
+
+5.  Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
